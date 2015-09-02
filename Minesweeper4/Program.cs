@@ -6,12 +6,11 @@ namespace Minesweeper4
     {
         static void Main(string[] args)
         {
-
-            var grid = Grid.Unexplored(5, 5, 2);
+            var grid = Grid.Unexplored(5, 5, 5);
             grid.RandomiseMines();
             Console.Write(Renderer.RenderGrid(grid));
             bool gameWon = true;
-            while (true)
+            for (int i = 0; i < grid.Height*grid.Width; i++)
             {
                 var coordinates = CoordinateReader.ReadLine(Console.ReadLine());
                 var newGrid = grid.Explore(coordinates);
@@ -22,16 +21,11 @@ namespace Minesweeper4
                     gameWon = false;
                     break;
                 }
-
                 if (newGrid.FullyExplored())
                 {
                     break;
                 }
-
-                
-
             }
-
             if (gameWon)
             {
                 Console.Write("Congratulations!!!\n");
@@ -40,9 +34,7 @@ namespace Minesweeper4
             {
                 Console.Write("Game Over!");
             }
-
             Console.ReadLine();
-
         }
     }
 }
