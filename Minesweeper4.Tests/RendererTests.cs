@@ -8,7 +8,7 @@ namespace Minesweeper4.Tests
         public void UnexploredGridIsRepresentedByUnderscores()
         {
             // Given
-            var grid = new Grid(width: 3, height: 2);
+            var grid = Grid.Unexplored(width: 3, height: 2);
             // When
             var output = Renderer.RenderGrid(grid);
             // Then
@@ -19,7 +19,7 @@ namespace Minesweeper4.Tests
         public void ExploredPointIsRepresentedByX()
         {
             //Given
-            var grid = new Grid(width: 3, height: 2)
+            var grid = Grid.Unexplored(width: 3, height: 2)
                 .Explore(new Coordinates(rowIndex: 1, columnIndex: 2));
             //When
             var output = Renderer.RenderGrid(grid);
