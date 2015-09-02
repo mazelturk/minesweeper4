@@ -68,6 +68,29 @@ namespace Minesweeper4.Tests
             
         }
 
+        [Test]
+        public void OneMineInGridIsMineIsTrue()
+        {
+            Grid grid = Grid.Unexplored(3, 2);
+            grid.InsertMine(new Coordinates(1, 2));
+            for (int i = 0; i < 2; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (j == 2 && i == 1)
+                    {
+                        Assert.AreEqual(true, grid.IsMine(new Coordinates(i, j)));
+                    }
+                    else
+                    {
+                        Assert.AreEqual(false, grid.IsMine(new Coordinates(i, j)));
+                    }
+                }
+            }   
+
+
+        }
+
 
 
     }

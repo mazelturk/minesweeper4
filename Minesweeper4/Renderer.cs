@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Runtime.Serialization.Formatters;
 
 namespace Minesweeper4
 {
@@ -17,7 +18,10 @@ namespace Minesweeper4
         private static string RenderRow(int width, Grid grid, int rowIndex)
         {
             var columns = Enumerable.Range(0, width)
-                .Select(columnIndex => grid.IsExplored(new Coordinates(rowIndex, columnIndex)) ? "x" : "_");
+                .Select(columnIndex => !grid.IsExplored(new Coordinates(rowIndex, columnIndex))
+                    ? "_"
+                    : grid.IsMine(new Coordinates(rowIndex, columnIndex)) ? "*" : "x");
+
             return string.Join("", columns) + "\n";
         }
     }
