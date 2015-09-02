@@ -1,4 +1,6 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace Minesweeper4
 {
@@ -31,19 +33,30 @@ namespace Minesweeper4
         private Point[,] _grid;
 
         private Grid(int width, int height, Point[,] grid, int numMines)
-        {           
-           
+        {
+            _grid = grid;
             _width = width;
             _height = height;
             _numMines = numMines;
-            _grid = RandomiseMines(_grid);
+          
         }
 
-        private Point[,] RandomiseMines(Point[,] _grid)
+        public void RandomiseMines()
         {
             for (int i = 0; i < _numMines; i++)
             {
+             
+                Random rnd = new Random();
+                var mineX = rnd.Next(Width - 1);
+                var mineY = rnd.Next(Height - 1);
+                var mineCoords = new Coordinates(mineX, mineY);
 
+                if (IsMine(mineCoords))
+                {
+                    i--;
+                }
+
+                InsertMine(mineCoords);
             }
         }
 

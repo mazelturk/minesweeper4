@@ -27,7 +27,7 @@ namespace Minesweeper4.Tests
         [Test]
         public void OneCoordinateExploredIsOnlyOneExplored()
         {
-            Grid grid = Grid.Unexplored(3, 2);
+            Grid grid = Grid.Unexplored(3, 2, 0);
             grid.Explore(new Coordinates(1, 2));
             for (int i = 0; i < 2; i++)
             {
@@ -89,6 +89,27 @@ namespace Minesweeper4.Tests
             }   
 
 
+        }
+
+        [Test]
+        public void NumberOfMinesRequestedInserted()
+        {
+            Grid grid = Grid.Unexplored(3, 2, 2);
+            grid.RandomiseMines();
+            int numMines = 0;
+            for (int i = 0; i < 2; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (grid.IsMine(new Coordinates(i, j)))
+                    {
+                        numMines++;
+                    }
+                }
+            }
+
+
+            Assert.AreEqual(2, numMines);
         }
 
 
