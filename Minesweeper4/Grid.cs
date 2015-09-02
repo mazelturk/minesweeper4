@@ -20,5 +20,10 @@
         {
             get { return _height; }
         }
+
+        public Grid Explore(Coordinates coordinates)
+        {
+            return this;
+        }
     }
 }

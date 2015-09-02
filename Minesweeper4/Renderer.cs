@@ -1,4 +1,6 @@
-﻿namespace Minesweeper4
+﻿using System.Linq;
+
+namespace Minesweeper4
 {
     public class Renderer
     {
@@ -6,17 +8,17 @@
         {
             var height = grid.Height;
             var width = grid.Width;
-            var output = "";
-            for (int i = 0; i < height; i++)
-            {
-                for (int j = 0; j < width; j++)
-                {
-                    output += "_";
-                }
-                output += "\n";
-            }
+            var output = Enumerable.Range(0, height)
+                .Select(rowIndex => RenderRow(width));
+     
+            return string.Join("", output);
+        }
 
-            return output;
+        private static string RenderRow(int width)
+        {
+            var columns = Enumerable.Range(0, width)
+                .Select(columnIndex => "_");
+            return string.Join("", columns) + "\n";
         }
     }
 }

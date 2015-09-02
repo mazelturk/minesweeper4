@@ -8,6 +8,12 @@ namespace Minesweeper4
         {
             var grid = new Grid(width: 10, height: 10);
             Console.Write(Renderer.RenderGrid(grid));
+
+            var coordinates = CoordinateReader.ReadLine(Console.ReadLine());
+            var newGrid = grid.Explore(coordinates);
+            Console.Write(Renderer.RenderGrid(newGrid));
+
+            Console.ReadLine();
         }
     }
 }
