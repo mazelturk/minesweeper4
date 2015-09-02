@@ -12,7 +12,7 @@ namespace Minesweeper4.Tests
         [Test]
         public void AllCoordinatesAreUnexploredByDefault()
         {
-            Grid grid = Grid.Unexplored(3, 2);
+            Grid grid = Grid.Unexplored(3, 2, 0);
             for (int i = 0; i < 2; i++)
             {
                 for (int j = 0; j < 3; j++)
@@ -49,7 +49,7 @@ namespace Minesweeper4.Tests
         [Test]
         public void TwoCoordinatesExploredOnlyOnesExplored()
         {
-            Grid grid = Grid.Unexplored(3, 2);
+            Grid grid = Grid.Unexplored(3, 2, 0);
             grid.Explore(new Coordinates(1, 2)).Explore(new Coordinates(0, 1));
             for (int i = 0; i < 2; i++)
             {
@@ -71,7 +71,7 @@ namespace Minesweeper4.Tests
         [Test]
         public void OneMineInGridIsMineIsTrue()
         {
-            Grid grid = Grid.Unexplored(3, 2);
+            Grid grid = Grid.Unexplored(3, 2, 0);
             grid.InsertMine(new Coordinates(1, 2));
             for (int i = 0; i < 2; i++)
             {
