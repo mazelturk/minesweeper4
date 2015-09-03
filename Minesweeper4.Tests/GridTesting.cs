@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace Minesweeper4.Tests
 {
-    internal class GridTesting
+    class GridTesting
     {
         [Test]
         public void AllCoordinatesAreUnexploredByDefault()
@@ -19,7 +19,9 @@ namespace Minesweeper4.Tests
                 {
                     Assert.AreEqual(false, grid.IsExplored(new Coordinates(i, j)));
                 }
-            }
+            }   
+           
+            
         }
 
         [Test]
@@ -40,7 +42,8 @@ namespace Minesweeper4.Tests
                         Assert.AreEqual(false, grid.IsExplored(new Coordinates(i, j)));
                     }
                 }
-            }
+            }   
+
         }
 
         [Test]
@@ -61,7 +64,8 @@ namespace Minesweeper4.Tests
                         Assert.AreEqual(false, grid.IsExplored(new Coordinates(i, j)));
                     }
                 }
-            }
+            }   
+            
         }
 
         [Test]
@@ -82,7 +86,9 @@ namespace Minesweeper4.Tests
                         Assert.AreEqual(false, grid.IsMine(new Coordinates(i, j)));
                     }
                 }
-            }
+            }   
+
+
         }
 
         [Test]
@@ -105,5 +111,8 @@ namespace Minesweeper4.Tests
 
             Assert.AreEqual(2, numMines);
         }
+
+
+
     }
 }

@@ -20,8 +20,7 @@ namespace Minesweeper4
             var columns = Enumerable.Range(0, width)
                 .Select(columnIndex => !grid.IsExplored(new Coordinates(rowIndex, columnIndex))
                     ? "_"
-                    : grid.IsMine(new Coordinates(rowIndex, columnIndex)) ? "*" : 
-                    grid.CountSurroundingMines(new Coordinates(rowIndex, columnIndex)).ToString());
+                    : grid.IsMine(new Coordinates(rowIndex, columnIndex)) ? "*" : "x");
 
             return string.Join("", columns) + "\n";
         }
