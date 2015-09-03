@@ -7,7 +7,7 @@ namespace Minesweeper4
         static void Main(string[] args)
         {
 
-            var grid = Grid.Unexplored(5, 5, 2);
+            var grid = Grid.Unexplored(20, 20, 100);
             grid.RandomiseMines();
             Console.Write(Renderer.RenderGrid(grid));
             bool gameWon = true;
@@ -27,11 +27,7 @@ namespace Minesweeper4
                 {
                     break;
                 }
-
-                
-
             }
-
             if (gameWon)
             {
                 Console.Write("Congratulations!!!\n");

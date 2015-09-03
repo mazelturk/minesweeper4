@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 
@@ -22,14 +23,9 @@ namespace Minesweeper4
    
         }
 
-        
-
         private readonly int _width;
         private readonly int _height;
         private readonly int _numMines;
-
-    
-
         private Point[,] _grid;
 
         private Grid(int width, int height, Point[,] grid, int numMines)
@@ -74,37 +70,24 @@ namespace Minesweeper4
         public Grid Explore(Coordinates coordinates)
         {
             _grid[coordinates.ColumnIndex, coordinates.RowIndex].Explore();
-            if (!IsMine(coordinates))
-            {
-                int surroundingMines = CountSurroundingMines(coordinates);
-                
-                _grid[coordinates.ColumnIndex, coordinates.RowIndex].SetSurroundingMines(surroundingMines);
-            }
 
             return new Grid(Width, Height, _grid, _numMines);
         }
 
         public int CountSurroundingMines(Coordinates coordinates)
         {
-            int count = 0;
-            for (int y = coordinates.RowIndex - 1; y <= coordinates.RowIndex + 1; y++)
-            {
-                for (int x = coordinates.ColumnIndex - 1; x <= coordinates.ColumnIndex + 1; x++)
-                {
-                    if (!OutOfBounds(x, y) && IsMine(new Coordinates(x, y)))
-                    {
-                        count++;
-                    }
-                }
-            }
+            var surroundingCoordinates = Enumerable.Range(coordinates.RowIndex - 1, 3)
+                .SelectMany(rowIndex =>
+                    Enumerable.Range(coordinates.ColumnIndex - 1, 3)
+                        .Select(columnIndex => new Coordinates(columnIndex: columnIndex, rowIndex: rowIndex)));
 
-            return count;
-            
+            return surroundingCoordinates
+                .Count(surroundingCoordinate => !OutOfBounds(surroundingCoordinate) && IsMine(surroundingCoordinate));
         }
 
-        private bool OutOfBounds(int x, int y)
+        private bool OutOfBounds(Coordinates coordinates)
         {
-            return x < 0 || y < 0 || x >= Width || y >= Height;
+            return coordinates.ColumnIndex < 0 || coordinates.RowIndex < 0 || coordinates.ColumnIndex >= Width || coordinates.RowIndex >= Height;
         }
 
      

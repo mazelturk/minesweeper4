@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GridExtensionMethods.cs" />
     <Compile Include="GridTesting.cs" />
     <Compile Include="RendererTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
