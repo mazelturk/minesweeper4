@@ -20,7 +20,7 @@ namespace Minesweeper4.Tests
         {
             //Given
             var grid = Grid.Unexplored(3, 2, 0)
-                .Explore(new Coordinates(rowIndex: 1, columnIndex: 2));
+                .Explore(new Coordinates( 2,  1));
             //When
             var output = Renderer.RenderGrid(grid);
             //Then
@@ -32,7 +32,7 @@ namespace Minesweeper4.Tests
         public void DiscoveredMineIsRepresentedByStar()
         {
             //Given
-            var grid = Grid.Unexplored(3, 2, 0).InsertMine(new Coordinates(1, 2)).Explore(new Coordinates(rowIndex: 1, columnIndex: 2));
+            var grid = Grid.Unexplored(3, 2, 0).InsertMine(new Coordinates(2, 1)).Explore(new Coordinates( 2,  1));
             //when 
             var output = Renderer.RenderGrid(grid);
             //Then

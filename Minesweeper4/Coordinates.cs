@@ -5,7 +5,7 @@
 
         private readonly int _rowIndex;
         private readonly int _columnIndex;
-        public Coordinates(int rowIndex, int columnIndex)
+        public Coordinates(int columnIndex, int rowIndex)
         {
             _rowIndex = rowIndex;
             _columnIndex = columnIndex;

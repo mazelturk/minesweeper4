@@ -74,9 +74,40 @@ namespace Minesweeper4
         public Grid Explore(Coordinates coordinates)
         {
             _grid[coordinates.ColumnIndex, coordinates.RowIndex].Explore();
+            if (!IsMine(coordinates))
+            {
+                int surroundingMines = CountSurroundingMines(coordinates);
+                
+                _grid[coordinates.ColumnIndex, coordinates.RowIndex].SetSurroundingMines(surroundingMines);
+            }
 
             return new Grid(Width, Height, _grid, _numMines);
         }
+
+        public int CountSurroundingMines(Coordinates coordinates)
+        {
+            int count = 0;
+            for (int y = coordinates.RowIndex - 1; y <= coordinates.RowIndex + 1; y++)
+            {
+                for (int x = coordinates.ColumnIndex - 1; x <= coordinates.ColumnIndex + 1; x++)
+                {
+                    if (!OutOfBounds(x, y) && IsMine(new Coordinates(x, y)))
+                    {
+                        count++;
+                    }
+                }
+            }
+
+            return count;
+            
+        }
+
+        private bool OutOfBounds(int x, int y)
+        {
+            return x < 0 || y < 0 || x >= Width || y >= Height;
+        }
+
+     
 
         public Grid InsertMine(Coordinates coordinates)
         {

@@ -17,7 +17,7 @@ namespace Minesweeper4.Tests
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    Assert.AreEqual(false, grid.IsExplored(new Coordinates(i, j)));
+                    Assert.AreEqual(false, grid.IsExplored(new Coordinates(j, i)));
                 }
             }   
            
@@ -28,18 +28,18 @@ namespace Minesweeper4.Tests
         public void OneCoordinateExploredIsOnlyOneExplored()
         {
             Grid grid = Grid.Unexplored(3, 2, 0);
-            grid.Explore(new Coordinates(1, 2));
+            grid.Explore(new Coordinates(2, 1));
             for (int i = 0; i < 2; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
                     if (j == 2 && i == 1)
                     {
-                        Assert.AreEqual(true, grid.IsExplored(new Coordinates(i, j)));
+                        Assert.AreEqual(true, grid.IsExplored(new Coordinates(j, i)));
                     }
                     else
                     {
-                        Assert.AreEqual(false, grid.IsExplored(new Coordinates(i, j)));
+                        Assert.AreEqual(false, grid.IsExplored(new Coordinates(j, i)));
                     }
                 }
             }   
@@ -50,18 +50,18 @@ namespace Minesweeper4.Tests
         public void TwoCoordinatesExploredOnlyOnesExplored()
         {
             Grid grid = Grid.Unexplored(3, 2, 0);
-            grid.Explore(new Coordinates(1, 2)).Explore(new Coordinates(0, 1));
+            grid.Explore(new Coordinates(2, 1)).Explore(new Coordinates(1, 0));
             for (int i = 0; i < 2; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
                     if (j == 2 && i == 1 || j == 1 & i == 0)
                     {
-                        Assert.AreEqual(true, grid.IsExplored(new Coordinates(i, j)));
+                        Assert.AreEqual(true, grid.IsExplored(new Coordinates(j, i)));
                     }
                     else
                     {
-                        Assert.AreEqual(false, grid.IsExplored(new Coordinates(i, j)));
+                        Assert.AreEqual(false, grid.IsExplored(new Coordinates(j, i)));
                     }
                 }
             }   
@@ -72,18 +72,18 @@ namespace Minesweeper4.Tests
         public void OneMineInGridIsMineIsTrue()
         {
             Grid grid = Grid.Unexplored(3, 2, 0);
-            grid.InsertMine(new Coordinates(1, 2));
+            grid.InsertMine(new Coordinates(2, 1));
             for (int i = 0; i < 2; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
                     if (j == 2 && i == 1)
                     {
-                        Assert.AreEqual(true, grid.IsMine(new Coordinates(i, j)));
+                        Assert.AreEqual(true, grid.IsMine(new Coordinates(j, i)));
                     }
                     else
                     {
-                        Assert.AreEqual(false, grid.IsMine(new Coordinates(i, j)));
+                        Assert.AreEqual(false, grid.IsMine(new Coordinates(j, i)));
                     }
                 }
             }   
@@ -101,7 +101,7 @@ namespace Minesweeper4.Tests
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    if (grid.IsMine(new Coordinates(i, j)))
+                    if (grid.IsMine(new Coordinates(j, i)))
                     {
                         numMines++;
                     }

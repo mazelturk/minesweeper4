@@ -18,9 +18,11 @@ namespace Minesweeper4
         private static string RenderRow(int width, Grid grid, int rowIndex)
         {
             var columns = Enumerable.Range(0, width)
-                .Select(columnIndex => !grid.IsExplored(new Coordinates(rowIndex, columnIndex))
+                .Select(columnIndex => !grid.IsExplored(new Coordinates(columnIndex, rowIndex))
                     ? "_"
-                    : grid.IsMine(new Coordinates(rowIndex, columnIndex)) ? "*" : "x");
+                    : grid.IsMine(new Coordinates(columnIndex, rowIndex)) ? "*" 
+                    : grid.CountSurroundingMines(new Coordinates(columnIndex, rowIndex))== 0 ? "x" 
+                    : grid.CountSurroundingMines(new Coordinates(columnIndex, rowIndex)).ToString());
 
             return string.Join("", columns) + "\n";
         }
